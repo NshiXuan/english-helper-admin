@@ -14,6 +14,9 @@
 
       <!-- 搜索 -->
       <el-button type="primary" @click="handleSearch">搜索</el-button>
+
+      <!-- 重置 -->
+      <el-button type="warning" @click="handleReset">重置</el-button>
     </div>
 
     <!-- 表格 -->
@@ -166,6 +169,12 @@ homeStore.fetchWordList()
 // 搜索
 function handleSearch() {
   homeStore.fetchWordByName(searchValue.value)
+}
+
+// 重置
+function handleReset() {
+  homeStore.fetchWordList()
+  searchValue.value = ''
 }
 
 // 添加单词
