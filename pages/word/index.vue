@@ -1,7 +1,20 @@
 <template>
   <div class="word">
-    <!-- 添加 -->
-    <el-button type="primary" @click="handleAdd">添加单词</el-button>
+    <div class="top">
+      <!-- 添加 -->
+      <el-button type="primary" @click="handleAdd">添加单词</el-button>
+
+      <!-- 搜索框 -->
+      <el-input
+        class="search"
+        v-model="searchValue"
+        placeholder="请输入内容"
+        clearable
+      />
+
+      <!-- 搜索 -->
+      <el-button type="primary" @click="handleSearch">搜索</el-button>
+    </div>
 
     <!-- 表格 -->
     <el-table :data="words" style="width: 100%">
@@ -104,7 +117,9 @@ import {
   ElTable,
   ElTableColumn,
   ElButton,
-  ElMessageBox
+  ElMessageBox,
+  ElSelect,
+  ElOption
 } from 'element-plus'
 import { storeToRefs } from 'pinia'
 import { useHomeStore } from '~~/store/home'
@@ -115,7 +130,11 @@ import { deleteWorById, IWord, addWorById } from '~~/service/word'
 const homeStore = useHomeStore()
 const { words } = storeToRefs(homeStore)
 
+// 控制展示对话框
 const dialogVisible = ref(false)
+
+// 搜索内容
+const searchValue = ref('')
 
 // 表单数据
 const form = reactive({
@@ -143,6 +162,11 @@ const options = [
 
 // 触发获取单词数据的action
 homeStore.fetchWordList()
+
+// 搜索
+function handleSearch() {
+  homeStore.fetchWordByName(searchValue.value)
+}
 
 // 添加单词
 function handleAdd() {
@@ -219,5 +243,15 @@ const handleDelete = (index: number, row: IWord) => {
 <style lang="scss" scoped>
 .word {
   padding: 20px;
+
+  .top {
+    display: flex;
+    gap: 20px;
+
+    .search {
+      width: 250px;
+      border-radius: 10px;
+    }
+  }
 }
 </style>

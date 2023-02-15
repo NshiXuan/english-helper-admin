@@ -19,13 +19,14 @@ export const useHomeStore = defineStore('home', {
   actions: {
     // 获取单个单词数据
     async fetchWordByName(word: string) {
+      console.log('fetchWordByName')
       const { data } = await getWordByName(word)
-      this.word = data.value?.data
+      console.log(data.value?.data)
+      this.words = [{ ...data.value?.data }]
     },
 
     // 获取单词列表
     async fetchWordList() {
-      console.log('fetchWordList')
       const { data } = await getWordList()
       this.words = data.value?.data
     }
