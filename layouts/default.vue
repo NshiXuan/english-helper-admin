@@ -4,7 +4,7 @@
       <el-menu
         :default-active="currentIndex"
         class="el-menu-vertical-demo"
-        background-color="#545c64"
+        background-color="#15152B"
         text-color="#fff"
         active-text-color="#ffd04b"
         router
