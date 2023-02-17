@@ -24,7 +24,7 @@ export default defineNuxtConfig({
   app: {
     // 给所有的页面的head添加SEO信息
     head: {
-      title: '英语学习助手',
+      title: '英语学习助手后台',
       meta: [
         {
           name: 'keywords',
